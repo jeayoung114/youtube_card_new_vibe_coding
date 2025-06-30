@@ -4,3 +4,10 @@ __pycache__/
 *.pyd
 .env
 .DS_Store
+# Card News output and asset folders
+cards/
+audio/
+emoji_png/
+music/
+card_news_output.json
+music_info.json
