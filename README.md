@@ -11,6 +11,12 @@ Create fully automated, fun, and engaging YouTube Shorts card news videos from t
 - **Video Assembly:** Combines cards and audio into a perfectly synchronized vertical video, ready for YouTube Shorts.
 - **Fun & Joyful Style:** All card news content is lively, playful, and ends sentences with exclamation marks for a joyful vibe!
 - **Timing Control:** Each card is limited to ~10 seconds of speech for optimal Shorts pacing.
+- **Emoji Support in Card Images:** Card image generator now uses emoji-compatible fonts if available, so emojis render correctly on cards (no more squares).
+- **Background Music Fadeout:** Video generator applies a smooth fadeout to the last 2 seconds of background music for a professional finish.
+- **Audio Artifact Fix:** Final audio (narration + background music) is always set to exactly the video duration, and fadeout is applied to the composite audio to prevent cracks or pops at the end.
+- **Music Info Passing:** `bg_music_retrieval.py` writes the downloaded music's name and path to `music_info.json`, which the video generator reads to use the correct background music.
+- **OpenAI-based Music Tagging:** Music tags for background music are now selected using OpenAI from a curated list, based on the generated card news script content.
+- **Emojis in Card Content:** Card news content generator instructs OpenAI to add relevant, fun, and visually appealing emojis to each card for better visual impact.
 
 ## Requirements
 - Python 3.8+
@@ -58,6 +64,21 @@ Create fully automated, fun, and engaging YouTube Shorts card news videos from t
 - **Card Count:** Change the `num_cards` parameter in `generate_card_news_contents`.
 - **Timing:** Adjust `max_chars_per_card` for shorter/longer card durations.
 
+## Recent Features & Fixes
+
+- **Emoji Support in Card Images:**
+  - Card image generator now uses emoji-compatible fonts if available, so emojis render correctly on cards (no more squares).
+- **Background Music Fadeout:**
+  - Video generator applies a smooth fadeout to the last 2 seconds of background music for a professional finish.
+- **Audio Artifact Fix:**
+  - Final audio (narration + background music) is always set to exactly the video duration, and fadeout is applied to the composite audio to prevent cracks or pops at the end.
+- **Music Info Passing:**
+  - `bg_music_retrieval.py` writes the downloaded music's name and path to `music_info.json`, which the video generator reads to use the correct background music.
+- **OpenAI-based Music Tagging:**
+  - Music tags for background music are now selected using OpenAI from a curated list, based on the generated card news script content.
+- **Emojis in Card Content:**
+  - Card news content generator instructs OpenAI to add relevant, fun, and visually appealing emojis to each card for better visual impact.
+
 ## Changelog
 
 ---
@@ -88,6 +109,9 @@ Create fully automated, fun, and engaging YouTube Shorts card news videos from t
 - **Smooth Card Script Transitions:** Card scripts are now generated with smooth, story-like connections between each card.
 - **Changelog Improvements:** Changelog now tracks each push with date and order, and is ready for future pushes.
 
+---
+#### 2025-06-29 — Fifth Push
+- **Emoji Support:** Added support for emoji-compatible fonts in card images; improved music tag selection using OpenAI; ensured final audio matches video duration with fadeout to prevent artifacts.
 
 ## License
 MIT
