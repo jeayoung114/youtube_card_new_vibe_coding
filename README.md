@@ -43,21 +43,21 @@ Create fully automated, fun, and engaging YouTube Shorts card news videos from t
    ```
 
 ## Usage
-1. Run the main script:
+1. Run the pipeline script:
    ```sh
-   python article_search.py
+   python run_pipeline.py
    ```
 2. Enter a keyword when prompted (e.g., `AI news`).
 3. The system will:
    - Search for news
    - Summarize and generate fun, lively card news content
    - Create card images and voice-over
-   - Assemble a vertical video in `card_news_video.mp4`
+   - Assemble a vertical video in `card_news_video_<topic>.mp4`
 
 ## Output
 - `cards/` — Generated card images
 - `audio/` — Voice-over audio files
-- `card_news_video.mp4` — Final vertical video for YouTube Shorts
+- `card_news_video_<topic>.mp4` — Final vertical video for YouTube Shorts
 
 ## Customization
 - **Colors:** Edit the `bg_colors` list in `article_search.py` for custom card backgrounds.
