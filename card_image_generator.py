@@ -175,10 +175,16 @@ def create_card_image(text, output_path, width=1080, height=1920, bg_color=(0, 1
         font_size -= 2
     # Draw content text inside content box (with emoji support)
     font = get_font(font_size, emoji=False)
-    y = content_box_top + (allowed_height - total_text_height) // 2 if lines else content_box_top
+    # Calculate vertical centering so that space above and below content is equal inside the content box
+    y_content_area = content_box_bottom - content_box_top
+    # Add extra spacing between lines (40% of font size)
+    extra_line_spacing = int(font_size * 0.4)
+    y_text_area = total_text_height
+    total_extra_spacing = extra_line_spacing * (len(lines) - 1) if lines else 0
+    y_text_area_adjusted = y_text_area + total_extra_spacing
+    y = content_box_top + (y_content_area - y_text_area_adjusted) // 2 if lines else content_box_top
     left_indent = content_box_left + margin // 2  # Indent from the left border
     emoji_size = font_size  # Make emoji same height as text
-    extra_line_spacing = int(font_size * 0.4)  # Add extra space between lines (40% of font size)
     for line in lines:
         bbox = draw.textbbox((0, 0), line, font=font)
         w, h = bbox[2] - bbox[0], bbox[3] - bbox[1]
