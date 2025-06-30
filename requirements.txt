@@ -2,3 +2,4 @@ elevenlabs==2.5.0
 moviepy==1.0.3
 openai==1.92.2
 requests==2.32.4
+emoji==2.10.0
