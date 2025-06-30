@@ -58,26 +58,39 @@ Create fully automated, fun, and engaging YouTube Shorts card news videos from t
 - **Card Count:** Change the `num_cards` parameter in `generate_card_news_contents`.
 - **Timing:** Adjust `max_chars_per_card` for shorter/longer card durations.
 
-## Major Updates (2025)
+## Changelog
 
-- **Pastel Card Backgrounds & High-Contrast Text:** Card backgrounds are now soft pastel tones, and each card uses a matching high-contrast text color for readability.
-- **Sentence-Based Line Breaks:** Card content now starts a new line after each sentence for better visibility.
-- **Smaller Font Size:** Maximum font size for card content is reduced for improved readability, especially with many lines.
-- **Lively Spoken Scripts:** Each card gets a lively, conversational script (not just the card text) for audio generation, making the voice-over sound like a real person.
-- **Script Length Control:** Spoken scripts are limited to 3 sentences or ~220 characters for punchy, short audio.
-- **Modular Card Generation:** Card image generation (including backgrounds and text color) is handled in `card_image_generator.py` via `generate_cards_from_json`, keeping the agent logic clean.
-- **Card Content Truncation:** Card text is never cut mid-sentence; truncation always happens at sentence boundaries.
-- **Flexible CLI:** You can control the number of reference articles, cards, and other options via command-line arguments.
-- **Output JSON:** All results (articles, summaries, card contents, scripts) are saved to `card_news_output.json` for easy reuse.
+---
+#### 2025-06-29 — First Push
+- **Initial Modular Structure:** Set up Python project, requirements, .env, and modular structure for news search, summarization, card image/audio/video generation.
+- **Automated News Search:** Implemented news search (SerpAPI) and summarization (OpenAI) with robust error handling.
+- **Card Image Generator:** Created pastel backgrounds, high-contrast text, and auto-scaling font for card images.
+- **Audio & Video Generation:** Added ElevenLabs audio generator and MoviePy video generator.
+- **Basic Workflow:** Automated workflow in `article_search.py` to go from keyword to finished video.
 
-## Advanced Usage
+---
+#### 2025-06-29 — Second Push
+- **Card News Agent:** Generates 3–5 sequential, story-like slides with hashtags.
+- **Card Content Truncation:** Truncates at sentence boundaries; lively, joyful language.
+- **Script Generator Agent:** Produces lively, conversational scripts for audio.
+- **Output JSON:** Includes articles, summaries, card contents, scripts, and music theme tags.
+- **Asset Folders:** All asset folders (`cards`, `audio`, `music`) are now consistently used and auto-created as needed.
 
-- **Generate Only Cards from JSON:**
-  ```sh
-  python card_image_generator.py --json card_news_output.json --output_dir cards
-  ```
-- **Custom Card Generation in Agent:**
-  The agent now only handles article search, summarization, and script generation. Card image generation is fully modular and handled in the image generator script.
+---
+#### 2025-06-29 — Third Push
+- **Jamendo Integration:** Downloads and uses copyright-free background music from Jamendo, with multi-step fallback to guarantee at least one track is always included in the video.
+- **Background Music Automation:** Copyright-free background music is automatically fetched from Jamendo and mixed into the final video.
+- **Robust Music Fallback:** If no music is found for suggested tags, the system retries with default and broad tags, ensuring at least one track is always loaded.
+- **Consistent Video Output:** The video generator always uses the downloaded background music and outputs to `card_news_video.mp4`.
+
+---
+#### 2025-06-29 — Fourth Push
+- **Smooth Card Script Transitions:** Card scripts are now generated with smooth, story-like connections between each card.
+- **Changelog Improvements:** Changelog now tracks each push with date and order, and is ready for future pushes.
+
+---
+#### [YYYY-MM-DD] — [Nth Push]
+- _Add your next push changes here._
 
 ## License
 MIT
