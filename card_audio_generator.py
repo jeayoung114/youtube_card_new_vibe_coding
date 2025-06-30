@@ -1,3 +1,7 @@
+"""
+card_audio_generator.py: Generates audio narration for each card using ElevenLabs API and can download music files.
+"""
+
 import requests
 import os
 from dotenv import load_dotenv
@@ -6,7 +10,15 @@ from elevenlabs.client import ElevenLabs
 load_dotenv()
 
 def download_music(url, output_path):
-    """Download music file from a direct URL."""
+    """
+    Download music file from a direct URL and save to output_path.
+
+    Args:
+        url (str): Direct URL to the music file.
+        output_path (str): Path to save the downloaded file.
+    Returns:
+        None. (Saves file to output_path)
+    """
     print(f"[Music] Attempting to download from: {url}")
     try:
         response = requests.get(url, stream=True, timeout=20)
@@ -22,6 +34,17 @@ def download_music(url, output_path):
         print(f"[Music] Exception occurred: {e}")
 
 def generate_card_audio(texts, output_dir="audio", voice_id="JBFqnCBsd6RMkjVDRZzb", model_id="eleven_multilingual_v2"):
+    """
+    Generate audio narration for each card using ElevenLabs API.
+
+    Args:
+        texts (list[str]): List of card scripts/texts.
+        output_dir (str): Directory to save audio files.
+        voice_id (str): ElevenLabs voice ID.
+        model_id (str): ElevenLabs model ID.
+    Returns:
+        None. (Saves MP3 files to output_dir)
+    """
     api_key = os.getenv("ELEVENLABS_API_KEY")
     if not api_key:
         raise ValueError("ELEVENLABS_API_KEY environment variable not set.")
@@ -41,6 +64,10 @@ def generate_card_audio(texts, output_dir="audio", voice_id="JBFqnCBsd6RMkjVDRZz
         print(f"[Audio] Saved: {output_dir}/card_{idx}.mp3")
 
 def main():
+    """
+    Example usage for generating card audio and downloading a sample music file.
+    No arguments. Runs test generation if run directly.
+    """
     # Example usage
     texts = [
         "This is a sample card news summary.",

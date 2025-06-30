@@ -11,6 +11,10 @@ from card_audio_generator import generate_card_audio
 from card_video_generator import create_video_from_cards
 
 def suggest_music_tags_from_scripts(scripts):
+    """
+    Suggest music theme tags based on the content of the generated card scripts.
+    Returns a comma-separated string of music tags suitable for the video's mood.
+    """
     text = " ".join(scripts).lower()
     if any(word in text for word in ["kids", "children", "playful", "funny", "cartoon"]):
         return "children,playful,fun,cheerful"
@@ -23,6 +27,10 @@ def suggest_music_tags_from_scripts(scripts):
     return "fun,upbeat,cheerful,pop"
 
 def run_pipeline(keyword, max_results=10, max_summaries=6, num_cards=3, generate_cards=True, generate_audio=True, generate_video=True, auto_music=True):
+    """
+    Run the full Card News pipeline: search articles, summarize, generate card content, images, audio, music, and final video.
+    Saves all intermediate and final outputs to disk.
+    """
     print(f"[Pipeline] Starting pipeline for keyword: '{keyword}'")
     articles = web_search(keyword, max_results)
     summaries = summarize_articles(articles, max_summaries)
@@ -54,6 +62,9 @@ def run_pipeline(keyword, max_results=10, max_summaries=6, num_cards=3, generate
     print(f"[Pipeline] Pipeline complete.")
 
 def main():
+    """
+    Parse command-line arguments and run the pipeline interactively or with arguments.
+    """
     import argparse
     parser = argparse.ArgumentParser(description="Run the full Card News pipeline")
     parser.add_argument('--keyword', type=str, required=False, help='Keyword to search for articles')

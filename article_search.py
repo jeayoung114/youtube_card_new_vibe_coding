@@ -1,3 +1,6 @@
+"""
+article_search.py: Handles news article search (via SerpAPI), summarization (via OpenAI), and card/script content generation for the Card News pipeline.
+"""
 import os
 from openai import OpenAI
 import requests
@@ -10,6 +13,15 @@ client = OpenAI(api_key=OPENAI_API_KEY)
 load_dotenv()
 
 def web_search(query, max_results=3):
+    """
+    Search for news articles using SerpAPI Google News engine.
+
+    Args:
+        query (str): The search keyword or phrase.
+        max_results (int): Maximum number of articles to return.
+    Returns:
+        list[dict]: List of articles, each as a dict with 'title', 'summary', and 'url'.
+    """
     print(f"[Agent] Searching for news articles about: {query}")
     import os
     import requests
@@ -37,6 +49,15 @@ def web_search(query, max_results=3):
     return results
 
 def summarize_articles(articles, max_summaries=3):
+    """
+    Summarize up to max_summaries articles using OpenAI if needed.
+
+    Args:
+        articles (list[dict]): List of articles with 'title', 'summary', and 'url'.
+        max_summaries (int): Maximum number of articles to summarize.
+    Returns:
+        list[str]: List of summary strings (with fun facts).
+    """
     print(f"[Agent] Summarizing up to {max_summaries} articles for card news...")
     summaries = []
     for idx, article in enumerate(articles[:max_summaries], 1):
@@ -81,6 +102,17 @@ def summarize_articles(articles, max_summaries=3):
     return summaries
 
 def generate_card_news_contents(summaries, topic, num_cards=3, max_chars_per_card=220):
+    """
+    Generate card news slide contents from summaries and topic using OpenAI.
+
+    Args:
+        summaries (list[str]): List of article summaries.
+        topic (str): The main topic or keyword.
+        num_cards (int): Number of card slides to generate.
+        max_chars_per_card (int): Max characters per card.
+    Returns:
+        list[str]: List of card content strings (with hashtags as title line).
+    """
     print(f"[Agent] Generating {num_cards} fun, joyful card news slides from all summaries...")
     # Join all summaries into one context
     all_summaries = "\n".join(summaries)
@@ -140,6 +172,14 @@ def generate_card_news_contents(summaries, topic, num_cards=3, max_chars_per_car
     return card_contents
 
 def generate_card_scripts(card_contents):
+    """
+    Generate lively spoken scripts for each card using OpenAI, with smooth transitions.
+
+    Args:
+        card_contents (list[str]): List of card content strings (with hashtags/title line).
+    Returns:
+        list[str]: List of spoken script strings for each card.
+    """
     print(f"[Agent] Generating lively spoken scripts for each card...")
     import openai
     OPENAI_API_KEY = os.getenv('OPENAI_API_KEY', 'YOUR_OPENAI_API_KEY')

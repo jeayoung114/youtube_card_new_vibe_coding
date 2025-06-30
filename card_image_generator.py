@@ -1,9 +1,35 @@
+"""
+card_image_generator.py: Generates card images for each news slide, with emoji support and auto-scaling text.
+"""
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import os
 import emoji as emoji_lib
 import subprocess
 
 def create_card_image(text, output_path, width=1080, height=1920, bg_color=(0, 102, 204), font_color=(255, 255, 255), max_font_size=90, min_font_size=14, margin=60, line_spacing=2, top_indent_lines=7, top_indent_font_size=22, title_font_size=32, title_box_height=100, box_border_color=(0,0,0), box_border_width=2, shadow_offset=8, shadow_color=(80,80,80,80)):
+    """
+    Create a card image with a title and content, supporting emojis and auto-scaling font size.
+
+    Args:
+        text (str): The card's text (title and content, separated by newline).
+        output_path (str): Path to save the generated image.
+        width, height (int): Image dimensions.
+        bg_color, font_color (tuple): Background and text color.
+        max_font_size, min_font_size (int): Font size range.
+        margin (int): Margin around content.
+        line_spacing (int): Spacing between lines.
+        top_indent_lines (int): Number of lines to indent the top section (title).
+        top_indent_font_size (int): Font size for the top indent lines.
+        title_font_size (int): Font size for the title.
+        title_box_height (int): Height of the title box.
+        box_border_color (tuple): Color of the border around the boxes.
+        box_border_width (int): Width of the border around the boxes.
+        shadow_offset (int): Offset for the shadow effect.
+        shadow_color (tuple): Color of the shadow (RGBA).
+
+    Returns:
+        None. (Saves image to output_path)
+    """
     # Split text into title line and content
     if '\n' in text:
         title_line, content = text.split('\n', 1)
@@ -164,6 +190,17 @@ def create_card_image(text, output_path, width=1080, height=1920, bg_color=(0, 1
     print(f"[Card] Saved card image: {output_path} (font size used: {font_size})")
 
 def generate_cards_from_json(json_path="card_news_output.json", output_dir="cards"):
+    """
+    Generate card images from a JSON file containing card contents.
+    Downloads emoji PNGs if needed.
+
+    Args:
+        json_path (str): Path to card news output JSON.
+        output_dir (str): Directory to save card images.
+
+    Returns:
+        None. (Saves images to output_dir)
+    """
     import json
     os.makedirs(output_dir, exist_ok=True)
     with open(json_path, "r", encoding="utf-8") as f:
@@ -212,6 +249,10 @@ def generate_cards_from_json(json_path="card_news_output.json", output_dir="card
     print(f"[Card] Card images generated in '{output_dir}' directory.")
 
 def main():
+    """
+    Command-line interface for generating card images from JSON.
+    No arguments. Prompts user if run directly.
+    """
     import argparse
     parser = argparse.ArgumentParser(description="Card Image Generator from JSON output")
     parser.add_argument('--json', type=str, default="card_news_output.json", help='Path to the card news output JSON file')

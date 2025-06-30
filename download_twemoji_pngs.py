@@ -1,3 +1,6 @@
+"""
+download_twemoji_pngs.py: Downloads emoji PNGs from Twemoji CDN for all emojis found in card news content.
+"""
 import os
 import requests
 import emoji
@@ -9,6 +12,14 @@ EMOJI_PNG_DIR = "emoji_png"
 # Utility to get all emojis from card_news_output.json
 
 def get_emojis_from_card_news(json_path="card_news_output.json"):
+    """
+    Extract all unique emojis from the card news output JSON file.
+
+    Args:
+        json_path (str): Path to card news output JSON.
+    Returns:
+        set[str]: Set of unique emoji characters found in card contents/scripts.
+    """
     if not os.path.exists(json_path):
         print(f"[WARN] {json_path} not found. Please run article_search.py first.")
         return set()
@@ -19,9 +30,26 @@ def get_emojis_from_card_news(json_path="card_news_output.json"):
     return set(c for c in text if emoji.is_emoji(c))
 
 def emoji_to_codepoint(e):
+    """
+    Convert an emoji character to its Twemoji codepoint string.
+
+    Args:
+        e (str): Emoji character.
+    Returns:
+        str: Twemoji codepoint string (e.g., '1f600').
+    """
     return "-".join(f"{ord(c):x}" for c in e)
 
 def download_emoji_png(codepoint, out_path):
+    """
+    Download a PNG for the given emoji codepoint from Twemoji CDN.
+
+    Args:
+        codepoint (str): Twemoji codepoint string.
+        out_path (str): Path to save the PNG file.
+    Returns:
+        bool: True if download succeeded, False otherwise.
+    """
     url = f"{TWEMOJI_BASE}{codepoint}.png"
     try:
         r = requests.get(url, timeout=10)
@@ -37,6 +65,10 @@ def download_emoji_png(codepoint, out_path):
     return False
 
 def main():
+    """
+    Download all required emoji PNGs for the current card news content.
+    No arguments. Runs download if run directly.
+    """
     os.makedirs(EMOJI_PNG_DIR, exist_ok=True)
     emojis = get_emojis_from_card_news()
     if not emojis:

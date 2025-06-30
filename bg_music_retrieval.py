@@ -1,3 +1,6 @@
+"""
+bg_music_retrieval.py: Downloads copyright-free background music from Jamendo based on topic/tags for use in card news videos.
+"""
 import requests
 import os
 from dotenv import load_dotenv
@@ -30,8 +33,12 @@ FEATURED_GENRES = [
 
 def get_working_tags_by_topic(topic):
     """
-    Return single working tags (not comma-separated) based on topic.
-    Uses only proven Jamendo tags.
+    Return a list of single, popular Jamendo tags based on the topic string.
+
+    Args:
+        topic (str): Topic or keyword string.
+    Returns:
+        list[str]: List of Jamendo tags suitable for the topic.
     """
     topic = topic.lower()
     
@@ -57,7 +64,12 @@ def get_working_tags_by_topic(topic):
 def search_jamendo_tracks_single_tag(tag, limit=10):
     """
     Query Jamendo API for tracks using a single tag.
-    Single tags work better than comma-separated ones.
+
+    Args:
+        tag (str): Jamendo tag to search for.
+        limit (int): Number of tracks to return.
+    Returns:
+        list[dict]: List of track dicts from Jamendo API.
     """
     url = "https://api.jamendo.com/v3.0/tracks/"
     params = {
@@ -98,6 +110,12 @@ def search_jamendo_tracks_single_tag(tag, limit=10):
 def search_jamendo_tracks_comprehensive(topic_tags, limit=5):
     """
     Comprehensive search strategy using multiple approaches.
+
+    Args:
+        topic_tags (list[str]): List of topic tags to search for.
+        limit (int): Number of tracks to return.
+    Returns:
+        list[dict]: List of track dicts from Jamendo API.
     """
     all_tracks = []
     
@@ -167,6 +185,12 @@ def search_jamendo_tracks(tags="", limit=5):
     """
     Updated main search function that handles both old and new calling patterns.
     Accepts either a string (comma-separated) or a list of tags.
+
+    Args:
+        tags (str|list[str]): Comma-separated string or list of tags to search for.
+        limit (int): Number of tracks to return.
+    Returns:
+        list[dict]: List of track dicts from Jamendo API.
     """
     if isinstance(tags, str) and tags:
         # If tags is a string, split it and try each tag individually
@@ -181,6 +205,12 @@ def search_jamendo_tracks(tags="", limit=5):
 def download_music(url, output_path):
     """
     Download music file from URL.
+
+    Args:
+        url (str): URL of the music file to download.
+        output_path (str): Local path to save the downloaded music file.
+    Returns:
+        bool: True if download was successful, False otherwise.
     """
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     print(f"[Music] Attempting to download from: {url}")
@@ -204,6 +234,11 @@ def suggest_tags_from_card_news(json_path="card_news_output.json"):
     """
     Suggest Jamendo tags based on the generated card news script/content using OpenAI.
     Returns a list of single tags (not comma-separated) from the curated lists.
+
+    Args:
+        json_path (str): Path to the card news output JSON file.
+    Returns:
+        list[str]: List of suggested Jamendo tags.
     """
     try:
         with open(json_path, "r", encoding="utf-8") as f:

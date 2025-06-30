@@ -1,8 +1,20 @@
+"""
+card_video_generator.py: Assembles card images and audio into a final video, adds background music, and handles output naming by topic.
+"""
 from moviepy.editor import ImageClip, AudioFileClip, concatenate_videoclips, CompositeAudioClip
 import os
 import json
 
 def get_music_path_from_json(json_path="music_info.json", default_path="music/bg_music.mp3"):
+    """
+    Get the background music path from music_info.json, or use the default if not found.
+
+    Args:
+        json_path (str): Path to music info JSON.
+        default_path (str): Fallback music file path.
+    Returns:
+        str: Path to background music file.
+    """
     if os.path.exists(json_path):
         try:
             with open(json_path, "r", encoding="utf-8") as f:
@@ -16,6 +28,14 @@ def get_music_path_from_json(json_path="music_info.json", default_path="music/bg
     return default_path
 
 def get_topic_from_json(json_path="card_news_output.json"):
+    """
+    Extract the topic/keyword from the card news output JSON for use in filenames.
+
+    Args:
+        json_path (str): Path to card news output JSON.
+    Returns:
+        str: Topic/keyword string (sanitized for filenames).
+    """
     if os.path.exists(json_path):
         try:
             with open(json_path, "r", encoding="utf-8") as f:
@@ -27,6 +47,21 @@ def get_topic_from_json(json_path="card_news_output.json"):
     return "topic"
 
 def create_video_from_cards(cards_dir="cards", audio_dir="audio", output_file=None, fps=30, duration=None, bg_music_path=None, music_fadeout=2, json_path="card_news_output.json"):
+    """
+    Create a vertical video from card images and audio, add background music, and save with topic in filename.
+
+    Args:
+        cards_dir (str): Directory with card images.
+        audio_dir (str): Directory with audio files.
+        output_file (str or None): Output video filename (auto if None).
+        fps (int): Frames per second.
+        duration (float or None): Default duration per card if no audio.
+        bg_music_path (str or None): Path to background music file.
+        music_fadeout (int): Seconds to fade out music.
+        json_path (str): Path to card news output JSON.
+    Returns:
+        None. (Saves video file)
+    """
     # Get topic for output file name
     topic = get_topic_from_json(json_path)
     if output_file is None:
@@ -72,6 +107,10 @@ def create_video_from_cards(cards_dir="cards", audio_dir="audio", output_file=No
     print(f"[Video] Video saved as {output_file}")
 
 def main():
+    """
+    Command-line interface for generating the final card news video.
+    No arguments. Runs video generation if run directly.
+    """
     create_video_from_cards()
 
 if __name__ == "__main__":
