@@ -88,9 +88,6 @@ Create fully automated, fun, and engaging YouTube Shorts card news videos from t
 - **Smooth Card Script Transitions:** Card scripts are now generated with smooth, story-like connections between each card.
 - **Changelog Improvements:** Changelog now tracks each push with date and order, and is ready for future pushes.
 
----
-#### [YYYY-MM-DD] — [Nth Push]
-- _Add your next push changes here._
 
 ## License
 MIT
