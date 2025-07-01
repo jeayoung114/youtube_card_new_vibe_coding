@@ -1,5 +1,5 @@
 **Note:**  
-> All code in this project was generated with Vibe Coding — not a single line was typed by hand.
+> All code in this project was generated with Vibe Coding — not a single line was typed by hand. Even Readme file!
 
 # Card News Shorts Generator
 
