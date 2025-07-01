@@ -1,9 +1,12 @@
+**Note:**  
+> All code in this project was generated with Vibe Coding — not a single line was typed by hand.
+
 # Card News Shorts Generator
 
 Create fully automated, fun, and engaging YouTube Shorts card news videos from trending news articles with synchronized images, voice-over, and vertical video output.
 
 ## Features
-- **Automated News Search:** Fetches the latest news articles using SerpAPI (Google News).
+- **Automated News Search:** Uses an MCP (agent-based) workflow to fetch the latest news articles via SerpAPI (Google News).
 - **Smart Summarization/Tag Generation:** Summarizes articles into concise, informative paragraphs with a fun fact and generates relevant tags using OpenAI GPT-4.1.
 - **Card News Content Creation:** Gathers all summaries and generates 3–5 lively, story-like card news slides for a cohesive video.
 - **Card News Script Creation:** Produces lively, conversational scripts for each card, optimized for voice-over.
@@ -22,6 +25,7 @@ Create fully automated, fun, and engaging YouTube Shorts card news videos from t
 - [OpenAI API key](https://platform.openai.com/)
 - [SerpAPI key](https://serpapi.com/)
 - [ElevenLabs API key](https://elevenlabs.io/)
+- [Jamendo API client ID](https://developer.jamendo.com/v3.0)
 - See `requirements.txt` for Python dependencies
 
 ## Setup
@@ -39,6 +43,7 @@ Create fully automated, fun, and engaging YouTube Shorts card news videos from t
    OPENAI_API_KEY=your_openai_key
    SERPAPI_API_KEY=your_serpapi_key
    ELEVENLABS_API_KEY=your_elevenlabs_key
+   JAMENDO_CLIENT_ID=your_jamendo_client_id
    ```
 
 ## Usage
@@ -56,6 +61,10 @@ Create fully automated, fun, and engaging YouTube Shorts card news videos from t
 ## Output
 - `cards/` — Generated card images
 - `audio/` — Voice-over audio files
+- `music/` — Downloaded background music tracks
+- `emoji_png/` — Downloaded emoji PNGs for card rendering
+- `card_news_output.json` — Full pipeline output (articles, summaries, cards, scripts, tags, etc.)
+- `music_info.json` — Info about the selected background music
 - `card_news_video_<topic>.mp4` — Final vertical video for YouTube Shorts
 
 ## Customization
@@ -124,7 +133,7 @@ MIT
 - [OpenAI](https://openai.com/)
 - [SerpAPI](https://serpapi.com/)
 - [ElevenLabs](https://elevenlabs.io/)
-- [Pillow](https://python-pillow.org/), [MoviePy](https://zulko.github.io/moviepy/)
+- [Jamendo](https://www.jamendo.com/start)
 
 ---
 
