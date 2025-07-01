@@ -4,19 +4,18 @@ Create fully automated, fun, and engaging YouTube Shorts card news videos from t
 
 ## Features
 - **Automated News Search:** Fetches the latest news articles using SerpAPI (Google News).
-- **Smart Summarization:** Summarizes articles into concise, informative paragraphs with a fun fact using OpenAI GPT-4.
-- **Card News Content Agent:** Gathers all summaries and generates 3–5 lively, story-like card news slides for a cohesive video.
-- **Dynamic Card Images:** Generates vertical (1080x1920) card images with large, readable text and a unique background color for each card.
+- **Smart Summarization/Tag Generation:** Summarizes articles into concise, informative paragraphs with a fun fact and generates relevant tags using OpenAI GPT-4.1.
+- **Card News Content Creation:** Gathers all summaries and generates 3–5 lively, story-like card news slides for a cohesive video.
+- **Card News Script Creation:** Produces lively, conversational scripts for each card, optimized for voice-over.
 - **Voice-Over Generation:** Uses ElevenLabs API to create natural-sounding audio for each card.
-- **Video Assembly:** Combines cards and audio into a perfectly synchronized vertical video, ready for YouTube Shorts.
-- **Fun & Joyful Style:** All card news content is lively, playful, and ends sentences with exclamation marks for a joyful vibe!
-- **Timing Control:** Each card is limited to ~10 seconds of speech for optimal Shorts pacing.
-- **Emoji Support in Card Images:** Card image generator now uses emoji-compatible fonts if available, so emojis render correctly on cards (no more squares).
-- **Background Music Fadeout:** Video generator applies a smooth fadeout to the last 2 seconds of background music for a professional finish.
-- **Audio Artifact Fix:** Final audio (narration + background music) is always set to exactly the video duration, and fadeout is applied to the composite audio to prevent cracks or pops at the end.
-- **Music Info Passing:** `bg_music_retrieval.py` writes the downloaded music's name and path to `music_info.json`, which the video generator reads to use the correct background music.
-- **OpenAI-based Music Tagging:** Music tags for background music are now selected using OpenAI from a curated list, based on the generated card news script content.
-- **Emojis in Card Content:** Card news content generator instructs OpenAI to add relevant, fun, and visually appealing emojis to each card for better visual impact.
+- **Background Music Retrieval:** Automatically fetches copyright-free background music based on the card news topic and mood.
+
+### Additional Details
+- Dynamic card images with emoji support and auto-scaling text
+- Video assembly with perfect synchronization and vertical format
+- Fun & joyful style: lively language, exclamation marks, and emojis
+- Timing control for optimal Shorts pacing
+- Output folders for cards, audio, and video
 
 ## Requirements
 - Python 3.8+
@@ -28,8 +27,8 @@ Create fully automated, fun, and engaging YouTube Shorts card news videos from t
 ## Setup
 1. **Clone the repository:**
    ```sh
-   git clone https://github.com/yourusername/card-news-shorts.git
-   cd card-news-shorts
+   git clone https://github.com/jeayoung114/youtube_card_new_vibe_coding.git
+   cd youtube_card_new_vibe_coding
    ```
 2. **Install dependencies:**
    ```sh
@@ -66,6 +65,9 @@ Create fully automated, fun, and engaging YouTube Shorts card news videos from t
 
 ## Recent Features & Fixes
 
+<details>
+<summary>Show Details</summary>
+
 - **Emoji Support in Card Images:**
   - Card image generator now uses emoji-compatible fonts if available, so emojis render correctly on cards (no more squares).
 - **Background Music Fadeout:**
@@ -78,6 +80,8 @@ Create fully automated, fun, and engaging YouTube Shorts card news videos from t
   - Music tags for background music are now selected using OpenAI from a curated list, based on the generated card news script content.
 - **Emojis in Card Content:**
   - Card news content generator instructs OpenAI to add relevant, fun, and visually appealing emojis to each card for better visual impact.
+
+</details>
 
 ## Changelog
 
