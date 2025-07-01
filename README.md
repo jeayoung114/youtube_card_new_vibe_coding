@@ -126,6 +126,11 @@ Create fully automated, fun, and engaging YouTube Shorts card news videos from t
 #### 2025-06-29 — Fifth Push
 - **Emoji Support:** Added support for emoji-compatible fonts in card images; improved music tag selection using OpenAI; ensured final audio matches video duration with fadeout to prevent artifacts.
 
+---
+#### 2025-06-30 — Sixth Push
+- **Emoji PNG Handling:** Card image generator now supports both single-codepoint and multi-codepoint emojis (such as flags and combined emojis). If an emoji PNG is missing from the `emoji_png/` directory, a replacement emoji PNG not already used on the same card is substituted, ensuring no duplicate emoji images per card and no more fallback "square" rendering. This prevents empty squares for missing emojis, even for complex emojis like flags (e.g., 🇰🇷). To add more emoji support, place additional PNGs in the `emoji_png/` directory using the correct Unicode codepoint filename (e.g., `1f1f0-1f1f7.png` for 🇰🇷).
+- **Video Code Fixes:** Additional improvements and fixes were made to the video generation code in `card_video_generator.py` for better reliability and output quality, including a fix for audio compatibility (re-encoding audio to AAC using ffmpeg) to ensure videos play correctly outside of VS Code.
+
 ## License
 MIT
 
